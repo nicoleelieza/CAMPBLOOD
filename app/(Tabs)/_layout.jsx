@@ -1,15 +1,24 @@
 import { Image, View } from 'react-native';
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { icons } from '../../constants';
+export const icons = {
+  home: require('../assets/icons/home.png'),
+  discover: require('../assets/icons/discover.png'),
+  chat: require('../assets/icons/chat.png'),
+  upload: require('../assets/icons/upload.png'),
+  notif: require('../assets/icons/notif.png'),
+  group: require('../assets/icons/group.png'),
+  profile: require('../assets/icons/profile.png'),
+};
+
 
 const TabIcon = ({ icon, color }) => {
   return (
-    <View>
+    <View style={{ alignItems: 'center' }}>
       <Image
         source={icon}
         resizeMode="contain"
-        style={{ width: 24, height: 24, tintColor: color }} 
+        style={{ width: 24, height: 24, tintColor: color }}
       />
     </View>
   );
@@ -17,75 +26,105 @@ const TabIcon = ({ icon, color }) => {
 
 const TabsLayout = () => {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        tabBarLabelPosition: 'below-icon',
+        tabBarStyle: {
+          height: 60,
+          backgroundColor: 'black',
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          marginBottom: 5,
+          color: 'white',
+        },
+      }}
+    >
       <Tabs.Screen
         name="home"
         options={{
-          title: 'Home',
+          title: 'HOME',
           headerShown: false,
-          tabBarIcon: ({ color }) => 
-          <TabIcon 
-          icon={icons.home} 
-          color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon icon={icons.home} color={focused ? 'white' : color} />
+          ),
+          tabBarLabel: 'HOME',
         }}
       />
+
       <Tabs.Screen
-    name="discover"
-    options={{
-      title: 'Discover',
-      headerShown: false,
-      tabBarIcon: ({ color, focused }) => (
-        <TabIcon
-          icon={icons.discover}
-          color={color}
-          name="discover"
-          focused={focused}
-        />
-      ),
-    }}
-  />
+        name="discover"
+        options={{
+          title: 'DISCOVER',
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon icon={icons.discover} color={focused ? 'white' : color} />
+          ),
+          tabBarLabel: 'DISCOVER',
+        }}
+      />
+
       <Tabs.Screen
         name="chat"
         options={{
-          title: 'Chat',
+          title: 'CHAT',
           headerShown: false,
-          tabBarIcon: ({ color }) => 
-          <TabIcon 
-          icon={icons.chat} 
-          color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon icon={icons.chat} color={focused ? 'white' : color} />
+          ),
+          tabBarLabel: 'CHAT',
         }}
       />
+
       <Tabs.Screen
         name="upload"
         options={{
-          title: 'Upload',
+          title: 'UPLOAD',
           headerShown: false,
-          tabBarIcon: ({ color }) => 
-          <TabIcon 
-          icon={icons.upload} 
-          color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon icon={icons.upload} color={focused ? 'white' : color} />
+          ),
+          tabBarLabel: 'UPLOAD',
+        }}
+      />
+
+      <Tabs.Screen
+        name="notif"
+        options={{
+          title: 'NOTIFICATIONS',
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon icon={icons.notif} color={focused ? 'white' : color} />
+          ),
+          tabBarLabel: 'NOTIF',
+        }}
+      />
+
+      <Tabs.Screen
+        name="group"
+        options={{
+          title: 'GROUP',
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon icon={icons.group} color={focused ? 'white' : color} />
+          ),
+          tabBarLabel: 'GROUP',
+        }}
+      />
+
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'PROFILE',
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon icon={icons.profile} color={focused ? 'white' : color} />
+          ),
+          tabBarLabel: 'PROFILE',
         }}
       />
     </Tabs>
-    
   );
-  
 };
 
-<Tabs.Screen
-name="notif"
-options={{
-  title: 'Notification',
-  headerShown: false,
-  tabBarIcon: ({ color, focused }) => (
-    <TabIcon
-      icon={icons.notif}
-      color={color}
-      name="notif"
-      focused={focused}
-    />
-  ),
-}}
-/>
- 
-  export default TabsLayout;
+export default TabsLayout;

@@ -1,105 +1,104 @@
-// // import { StatusBar } from 'expo-status-bar';
-// // import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { Link } from 'expo-router';
 
-// // export default function App() {
-// //   return (
-// //     <View style={styles.container}>
-// //       <Text>WELCOME TO BLOODY HOUNDS!</Text>
-// //       <StatusBar style="auto" />
-// //     </View>
-// //   );
-  
-// // }
-// // const styles = StyleSheet.create({
-// //   container: {
-// //     flex: 1,
-// //     backgroundColor: '#fff',
-// //     alignItems: 'center',
-// //     justifyContent: 'center',
-// //   },
-// // });
-
-// import { StatusBar } from 'expo-status-bar';
-// import { StyleSheet, Text, View } from 'react-native';
-// import React from "react";
-// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import Navbar from "./components/Navbar";
-// import Home from "./pages/Home";
-// import Discover from "./pages/Discover";
-// import Messages from "./pages/Messages";
-// import Upload from "./pages/Upload";
-// import Notifications from "./pages/Notifications";
-// import Communities from "./pages/Communities";
-// import Profile from "./pages/Profile";
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>WELCOME TO BLOODY HOUNDS!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-  
-// }
-
-
-
-// const App = () => {
-//   return (
-//     <Router>
-//       <div className="min-h-screen bg-gray-900 text-gray-100">
-//         <Navbar />
-//         <Routes>
-//           <Route path="/" element={<Home />} />
-//           <Route path="/discover" element={<Discover />} />
-//           <Route path="/messages" element={<Messages />} />
-//           <Route path="/upload" element={<Upload />} />
-//           <Route path="/notifications" element={<Notifications />} />
-//           <Route path="/communities" element={<Communities />} />
-//           <Route path="/profile" element={<Profile />} />
-//         </Routes>
-//       </div>
-//     </Router>
-//   );
-// };
-
-// export default App;
-
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useEffect } from 'react';
-import { Slot, Stack, SplashScreen } from 'expo-router';
-import { useFonts } from 'expo-font';
-
-SplashScreen.preventAutoHideAsync(); // Ensure the splash screen does not auto-hide
-
-const MainLayout = () => {
-  // Load custom fonts
-  const [fontsLoaded, error] = useFonts({
-    "Taviraj-SemiBold": require("../assets/fonts/Taviraj-SemiBold.ttf"),
-    "Taviraj-Black": require("../assets/fonts/Taviraj-Black.ttf"),
-    "Taviraj-ExtraLight": require("../assets/fonts/Taviraj-ExtraLight.ttf"),
-  });
-
-  useEffect(() => {
-    if (error) throw error;
-
-    if (fontsLoaded) {
-      SplashScreen.hideAsync(); // Hide splash screen when fonts are loaded
-    }
-  }, [fontsLoaded, error]);
-
-  // Show nothing while fonts are loading
-  if (!fontsLoaded && !error) {
-    return null;
-  }
-
+export default function App() {
   return (
-    <Stack>
-      {/* Define the stack screens */}
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Slot /> {/* This renders the appropriate screen depending on the route */}
-    </Stack>
+    <View style={styles.container}>
+      {/* Welcome message with larger font size */}
+      <Text style={styles.welcomeText}>WELCOME CHILD OF NIGHT!</Text>
+
+      <View style={styles.header}>
+        <Text style={styles.headerText}>CAMP BLOOD</Text>
+      </View>
+
+      <Image
+        source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkLxxyaM5lk4OXAC2btm3-CqjjubHEWAXHtQMZ5BlbCjfjy85V' }}
+        style={styles.image}
+        resizeMode="cover"
+      />
+
+      <View style={styles.buttonContainer}>
+        {/* Smaller Sign In and Sign Up buttons */}
+        <Link href="/signin" style={styles.smallButton}>
+          SIGN IN
+        </Link>
+        <Link href="/signup" style={styles.smallButton}>
+          SIGN UP
+        </Link>
+      </View>
+
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#A5A3F3',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  welcomeText: {
+    color: 'black',
+    fontSize: 20, // Larger font size for emphasis
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  header: {
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  headerText: {
+    color: 'black',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  image: {
+    width: '70%',
+    height: 200,
+    marginBottom: 20,
+    borderRadius: 20,
+  },
+  buttonContainer: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  smallButton: {
+    backgroundColor: 'black',
+    color: 'white',
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    fontSize: 14,
+    textAlign: 'center',
+    marginBottom: 8,
+    borderRadius: 5,
+    width: '40%', // Adjust width to fit the content
+    maxWidth: 150, // Optional max-width for smaller screens
+  },
+});
+
+// SignIn Component
+const SignIn = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.headerText}>SIGN IN</Text>
+      {/* Add your sign-in form here */}
+    </View>
   );
 };
 
-export default MainLayout;
+// SignUp Component
+const SignUp = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.headerText}>SIGN UP</Text>
+      {/* Add your sign-up form here */}
+    </View>
+  );
+};
+
+export { SignIn, SignUp };
